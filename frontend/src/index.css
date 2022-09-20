@@ -1,5 +1,5 @@
 body {
-  background-image: url('./assets//background.PNG');
+  background-image: url("./assets/background.PNG");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

@@ -1,4 +1,4 @@
-import './static/App.css';
+import './App.css';
 import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
