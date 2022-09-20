@@ -1,1 +1,4 @@
-.mainContainer {}
+.navStyle {
+    background-color: #191919;
+    box-shadow: 0px 2px 3px 1px rgb(0, 0, 0)
+}
