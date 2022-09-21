@@ -16,11 +16,12 @@ function App() {
     navColour = ["#777777","#777777","#76B900"]
   }    
   
-  
+
   return (
     <div className="mainContainer">
       <header></header>
       <Cnavbar setScreen={setScreen} navColour={navColour} />
+      <bookDisplay />
     </div>
 
   )
