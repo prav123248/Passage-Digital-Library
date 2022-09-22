@@ -9,9 +9,18 @@
     overflow-y:hidden;
 }
 
-.navLink {
+.navLinkStyle {
     border:1px solid black;
+    text-decoration: none;
+    text-align:center;
+    padding:0.5em;
     border-top:none;
     border-bottom:none;
 }
 
+
+
+
+p {
+    color: white;
+}
