@@ -1,0 +1,8 @@
+ID (Auto Generated)
+Title (API)
+Author (API, Follow up call on author API)
+PublishDate (API)
+CoverID.jpg (API, Follow up call on Cover API and saved as an address only if valid)
+Number of Pages (Fill in but can be null)
+Genre (Manually)
+Finished (Marked later, initially False)

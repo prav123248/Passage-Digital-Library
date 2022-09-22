@@ -2,6 +2,7 @@ import '../common.css';
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cnavbar from '../components/Cnavbar.js';
+import BookDisplay from '../components/BookDisplay.js'
 
 function Home(props) {
 
@@ -9,7 +10,7 @@ function Home(props) {
         return (
             <div>
                 <Cnavbar navSet={1} />
-                <p>Read page</p>
+                <BookDisplay />
             </div>
         )
     }
@@ -17,6 +18,7 @@ function Home(props) {
         return (
             <div>
                 <Cnavbar navSet={2} />
+                <BookDisplay />
                 <p>To read page</p>
             </div>
         )
