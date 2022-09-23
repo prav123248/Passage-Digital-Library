@@ -17,10 +17,20 @@ function BookDisplay(props) {
         <TitleWrapper title="The Mountain Sings"/>
         <div className="thumbOverlay">
         <Card.ImgOverlay>
-          <Card.Title>Card title</Card.Title>
+          
           <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
           </p>
         </Card.ImgOverlay>
         </div>
@@ -31,10 +41,164 @@ function BookDisplay(props) {
         <TitleWrapper title="The Mountain Sings"/>
         <div className="thumbOverlay">
         <Card.ImgOverlay>
-          <Card.Title>Card title</Card.Title>
+          
           <p>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
+          </p>
+        </Card.ImgOverlay>
+        </div>
+      </Card>
+
+      <Card className="thumbnailCard">
+        <Card.Img className="thumbImg" src={img} />
+        <TitleWrapper title="The Mountain Sings"/>
+        <div className="thumbOverlay">
+        <Card.ImgOverlay>
+          
+          <p>
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
+          </p>
+        </Card.ImgOverlay>
+        </div>
+      </Card>
+
+      <Card className="thumbnailCard">
+        <Card.Img className="thumbImg" src={img} />
+        <TitleWrapper title="The Mountain Sings"/>
+        <div className="thumbOverlay">
+        <Card.ImgOverlay>
+          
+          <p>
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
+          </p>
+        </Card.ImgOverlay>
+        </div>
+      </Card>
+
+      <Card className="thumbnailCard">
+        <Card.Img className="thumbImg" src={img} />
+        <TitleWrapper title="The Mountain Sings"/>
+        <div className="thumbOverlay">
+        <Card.ImgOverlay>
+          
+          <p>
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
+          </p>
+        </Card.ImgOverlay>
+        </div>
+      </Card>
+
+      <Card className="thumbnailCard">
+        <Card.Img className="thumbImg" src={img} />
+        <TitleWrapper title="The Mountain Sings"/>
+        <div className="thumbOverlay">
+        <Card.ImgOverlay>
+          
+          <p>
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
+          </p>
+        </Card.ImgOverlay>
+        </div>
+      </Card>
+
+      <Card className="thumbnailCard">
+        <Card.Img className="thumbImg" src={img} />
+        <TitleWrapper title="The Mountain Sings"/>
+        <div className="thumbOverlay">
+        <Card.ImgOverlay>
+          
+          <p>
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
+          </p>
+        </Card.ImgOverlay>
+        </div>
+      </Card>
+
+      <Card className="thumbnailCard">
+        <Card.Img className="thumbImg" src={img} />
+        <TitleWrapper title="The Mountain Sings"/>
+        <div className="thumbOverlay">
+        <Card.ImgOverlay>
+          
+          <p>
+            <b>Genre :</b> 
+            <br></br>
+            Fantasy
+            <br></br>
+            <br></br>
+            <b>Author :</b><br></br> Brandon Sanderson
+            <br></br>
+            <br></br>
+            <b>Pages :</b> 3020
+            <br></br>
+            <br></br>
+            <b>Publish Date :</b> 3020
           </p>
         </Card.ImgOverlay>
         </div>
