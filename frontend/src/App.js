@@ -7,21 +7,7 @@ import Statistics from "./pages/Statistics";
 import NoPage from "./pages/NoPage";
 
 function App() {
-  var [apiData, setApiData] = useState(0);
-  
-  const apiCall = (webPage) => {
-    fetch(webPage)
-    .then(async response => {
-      const data = await response.json();
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      setApiData(data)
-    })
-    .catch(error => {
-      console.log("Error")
-    })
-  }
+
   
   return (
     <BrowserRouter>

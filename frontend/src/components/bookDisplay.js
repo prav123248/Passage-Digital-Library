@@ -6,6 +6,7 @@ import img from '../assets/Large Sample Image Size.jpg';
 import img2 from '../assets/Large Sample Image Size 2.jpg';
 import img3 from '../assets/Large Sample Image Size 3.jpg';
 import img4 from '../assets/Large Sample Image Size 4.jpg';
+import img5 from '../assets/Large Sample Image Size 5.jpg';
 import TitleWrapper from './TitleWrapper';
 function BookDisplay(props) {
   return (
@@ -61,7 +62,7 @@ function BookDisplay(props) {
       </Card>
 
       <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
+        <Card.Img className="thumbImg" src={img5} />
         <TitleWrapper title="The Mountain Sings"/>
         <div className="thumbOverlay">
         <Card.ImgOverlay>
