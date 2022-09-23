@@ -102,7 +102,7 @@ function Manage() {
             </Button>
           </Form>
 
-          <Form className="addForm">
+          <Form className="addForm" action="addBook/" method="post">
             <Form.Group controlId="bookDetails">
               <Form.Control name="title" maxLength="255" className="bookDetail" placeholder="Book Title" />
               <Form.Control name="author" maxLength="255" className="bookDetail" placeholder="Author" />

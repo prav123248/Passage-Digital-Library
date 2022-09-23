@@ -24,3 +24,5 @@ yarn-error.log*
 
 #backend
 backend/__pycache__
+bookDatabase/__pycache__
+bookDatabase/migrations
