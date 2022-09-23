@@ -14,7 +14,7 @@ function Cnavbar(props) {
     <div className="navContainer">
       <Nav className="navBox">
         <NavLink className="navLinkStyle" to="/Library" style={ { color: (props.navSet == 1) ? '#76B900' : '#777777'} }>Library</NavLink>
-        <NavLink className="navLinkStyle" to="/ToRead" style={ { color: (props.navSet == 2) ? '#76B900' : '#777777' } }>To Read</NavLink>
+        <NavLink className="navLinkStyle noLeftBorder noRightBorder" to="/ToRead" style={ { color: (props.navSet == 2) ? '#76B900' : '#777777' } }>To Read</NavLink>
         <NavLink className="navLinkStyle" to="/Statistics" style={ { color: (props.navSet == 3) ? '#76B900' : '#777777' } }>Statistics</NavLink>              
       </Nav>
 
