@@ -42,3 +42,7 @@
 img[src=""] {
     display:none;
 }
+
+.DropdownForm {
+    border:2px solid red;
+}

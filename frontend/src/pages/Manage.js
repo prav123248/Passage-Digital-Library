@@ -2,9 +2,47 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cnavbar from '../components/Cnavbar.js';
 import './Manage.css';
-import {Form, Button} from 'react-bootstrap';
+import {Form, Button, Select} from 'react-bootstrap';
 
 function Manage() {
+
+  var [dbRemove, setRemove] = useState("");
+  var [dbMark, setMark] = useState("");
+  var [dbData, setData] = useState("");
+
+
+
+  var currentUrl = window.location.protocol + "//" + window.location.host
+  var optionDBCall = (dbURL) => {
+    currentUrl = currentUrl + dbURL;
+    fetch(currentUrl)
+    .then(async response => {
+        const data = await response.json();
+        if (!response.ok) {
+            return Promise.reject(response.statusText);
+        }
+
+        setData(data);
+    })
+  }
+
+  useEffect(() => {
+    optionDBCall("/db/toRead/?format=json")
+  },[]);
+  
+  var optionDBList = () => {
+    var output = []
+
+    if (dbData !== undefined) {
+      console.log(dbData);
+      for (var i=0; i<dbData["results"].length; i++) {
+        output.push(<option>{dbData["results"][i]}</option>)
+      }
+    }
+
+    return output;
+  }
+
 
   var [apiData, setApiData] = useState(0);
 
@@ -128,6 +166,16 @@ function Manage() {
 
         <div className="formContainer">
           <h1>Remove book</h1>
+          <Form className="addForm">
+            <Form.Group controlId="dropDown">
+            <Form.Select>
+              {optionDBList()}
+            </Form.Select>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              Fill In
+            </Button>
+          </Form>
         </div>
 
         <div className="formContainer">
