@@ -14,7 +14,7 @@ function App() {
       <Routes>
           <Route path="/" element={<Home selection={"read"} />} />
           <Route path="Library" element={<Home selection={"read"} />} />
-          <Route path="ToRead" element={<Home selection={"unread"} />} />
+          <Route path="ToRead" element={<Home selection={"toRead"} />} />
           <Route path="Statistics" element={<Statistics />} />
           <Route path="Manage" element={<Manage />} />
           <Route path="*" element={<NoPage />} />

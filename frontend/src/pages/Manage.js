@@ -18,7 +18,9 @@ function Manage() {
   var [authors, setAuthors] = useState("");
   var [coverPage, setCoverPage] = useState("");
 
+
   
+
   const apiCall = (webPage) => {
     fetch(webPage.substr(0,webPage.lastIndexOf("/"))+".json")
     .then(async response => {

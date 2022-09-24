@@ -9,205 +9,109 @@ import img4 from '../assets/Large Sample Image Size 4.jpg';
 import img5 from '../assets/Large Sample Image Size 5.jpg';
 import TitleWrapper from './TitleWrapper';
 function BookDisplay(props) {
-  return (
+
+  var displayBooks = (bookRecords) => {
+    var bookJSX = []
+    console.log(bookRecords);
     
-    <div className="scrollContainer">
+    for (var i=0; i<bookRecords.length; i++) {
+      if (bookRecords[i]["bookID"] === undefined) {
+        console.log(bookRecords[i]["name"])
+        bookJSX.push(
+          <Card className="thumbnailCard">
+            <Card.Img className="thumbImg" src={img} />
+            <TitleWrapper title={bookRecords[i]["name"]}/>
+            <div className="thumbOverlay">
+              <Card.ImgOverlay> 
+                <p>
+                  <b>Genre :</b> 
+                  <br></br>
+                  {bookRecords[i]["genre"]}
+                  <br></br>
+                  <br></br>
+                  <b>Author :</b><br></br> {bookRecords[i]["author"]}
+                  <br></br>
+                  <br></br>
+                  <b>Pages :</b> {bookRecords[i]["pageCount"]}
+                  <br></br>
+                  <br></br>
+                  <b>Publish Date :</b> {bookRecords[i]["publishedDate"]}
+                </p>
+              </Card.ImgOverlay>
+            </div>
+          </Card>
+        )
+      }
+      else {
+          console.log(bookRecords[i]["bookID"]["name"])
+          bookJSX.push(
+            <Card className="thumbnailCard">
+              <Card.Img className="thumbImg" src={img} />
+              <TitleWrapper title={bookRecords[i]["bookID"]["name"]}/>
+              <div className="thumbOverlay">
+                <Card.ImgOverlay> 
+                  <p>
+                    <b>Genre :</b> 
+                    <br></br>
+                    {bookRecords[i]["bookID"]["genre"]}
+                    <br></br>
+                    <br></br>
+                    <b>Author :</b><br></br> {bookRecords[i]["bookID"]["author"]}
+                    <br></br>
+                    <b>Pages :</b> {bookRecords[i]["bookID"]["pageCount"]}
+                    <br></br>
+                    <br></br>
+                    <b>Publish Date :</b> {bookRecords[i]["bookID"]["publishedDate"]}
+                  </p>
+                </Card.ImgOverlay>
+              </div>
+            </Card>
+          )
+      }
+    }
 
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img5} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
-
-      <Card className="thumbnailCard">
-        <Card.Img className="thumbImg" src={img} />
-        <TitleWrapper title="The Mountain Sings"/>
-        <div className="thumbOverlay">
-        <Card.ImgOverlay>
-          
-          <p>
-            <b>Genre :</b> 
-            <br></br>
-            Fantasy
-            <br></br>
-            <br></br>
-            <b>Author :</b><br></br> Brandon Sanderson
-            <br></br>
-            <br></br>
-            <b>Pages :</b> 3020
-            <br></br>
-            <br></br>
-            <b>Publish Date :</b> 3020
-          </p>
-        </Card.ImgOverlay>
-        </div>
-      </Card>
+    
+    return bookJSX;
+  }
 
 
-    </div>
-  );
+    /**
+    for (var i=0; i<(bookRecords["count"]); i++) {
+      bookJSX.push(
+        <Card className="thumbnailCard">
+          <Card.Img className="thumbImg" src={img} />
+          <TitleWrapper title={bookRecords["results"][i]["name"]}/>
+          <div className="thumbOverlay">
+            <Card.ImgOverlay> 
+              <p>
+                <b>Genre :</b> 
+                <br></br>
+                {bookRecords["results"][i]["Genre"]}
+                <br></br>
+                <br></br>
+                <b>Author :</b><br></br> {bookRecords["results"][i]["Author"]}
+                <br></br>
+                <br></br>
+                <b>Pages :</b> {bookRecords["results"][i]["PageCount"]}
+                <br></br>
+                <br></br>
+                <b>Publish Date :</b> {bookRecords["results"][i]["PublishedDate"]}
+              </p>
+            </Card.ImgOverlay>
+          </div>
+        </Card>
+      )
+    }
+     */
+  
+
+  if (props.bookData !== undefined) {
+    return (
+      <div className="scrollContainer">
+        {displayBooks(props.bookData["results"])}
+      </div>
+    )} 
+
 }
 
 export default BookDisplay;

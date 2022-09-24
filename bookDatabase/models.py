@@ -10,12 +10,12 @@ class Book(models.Model):
     finished = models.BooleanField()
 
     def __str__(self):
-        return (self.name + "," + self.genre + "," + self.author + "," + self.coverPath + "," + self.publishedDate + "," + self.pageCount)
+        return (str(self.id) + "," + self.name + "," + self.genre + "," + self.author + "," + self.coverPath + "," + self.publishedDate + "," + self.pageCount)
 
 class Read(models.Model):
     dateFinished = models.DateTimeField()
     bookID = models.ForeignKey(Book, on_delete=models.CASCADE)
 
     def __str__(self):
-        return (self.dateFinished, self.bookID)
+        return str(self.id)
 
