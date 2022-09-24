@@ -18,6 +18,8 @@ from django.urls import path, include
 from . import views
 from bookDatabase import views as dbView
 from bookDatabase import urls as dbUrls
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -25,4 +27,4 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('addBook/', dbView.addBook, name="addBook"),
     path('db/', include(dbUrls))
-]
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

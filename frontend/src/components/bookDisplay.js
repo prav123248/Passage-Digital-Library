@@ -19,7 +19,8 @@ function BookDisplay(props) {
         console.log(bookRecords[i]["name"])
         bookJSX.push(
           <Card className="thumbnailCard">
-            <Card.Img className="thumbImg" src={img} />
+            
+            <Card.Img className="thumbImg" src={"/media/Covers/" + bookRecords[i]["coverPath"]} />
             <TitleWrapper title={bookRecords[i]["name"]}/>
             <div className="thumbOverlay">
               <Card.ImgOverlay> 
@@ -46,7 +47,7 @@ function BookDisplay(props) {
           console.log(bookRecords[i]["bookID"]["name"])
           bookJSX.push(
             <Card className="thumbnailCard">
-              <Card.Img className="thumbImg" src={img} />
+              <Card.Img className="thumbImg" src={"../assets/" + bookRecords[i]["bookID"]["coverPath"]} />
               <TitleWrapper title={bookRecords[i]["bookID"]["name"]}/>
               <div className="thumbOverlay">
                 <Card.ImgOverlay> 

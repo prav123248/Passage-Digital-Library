@@ -35,6 +35,10 @@
     margin-left: 0em;
 }
 
+#coverPath {
+    display:none;
+}
+
 img[src=""] {
     display:none;
 }

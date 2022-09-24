@@ -8,6 +8,7 @@ from .models import Book, Read
 from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import BookSerializer, ReadSerializer
+import urllib.request
 
 def index(request):
     return render(request, 'index.html')
@@ -31,8 +32,16 @@ def addBook(request):
     pageCount = request.POST['pagecount']
     published = request.POST['published']
     finish = False
-    cover="paths"
-    bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, finished=finish, coverPath=cover)
+    coverURL=request.POST['coverPath']
+    uniqueCoverID = coverURL.split("id/")[1]
+    coverFileName = "media/Covers/" + uniqueCoverID
+
+    image = (urllib.request.urlopen(coverURL)).read()
+    with open(coverFileName, "wb") as file:
+        file.write(image)
+        file.close()
+    
+    bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, finished=finish, coverPath=uniqueCoverID)
     bookRecord.save()
     return HttpResponseRedirect(reverse('index'))
 

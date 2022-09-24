@@ -60,6 +60,7 @@ function Manage() {
         coverID = data["covers"][0]
         coverPage = "https://covers.openlibrary.org/b/id/" + coverID + "-L.jpg";
         document["coverPreview"].src = coverPage;
+        document.getElementsByName("coverPath")[0].value = coverPage;
         
       }
 
@@ -111,6 +112,7 @@ function Manage() {
               <Form.Control name="genre" maxLength="255" className="bookDetail" placeholder="Genre" />
               <Form.Control name="pagecount" maxLength="255" className="bookDetail" placeholder="Number of Pages" />
               <Form.Control name="published" maxLength="255" className="bookDetail" placeholder="Published Date" />
+              <Form.Control name="coverPath" id="coverPath" maxLength="255"/>
               <img name="coverPreview" src="" style={{color:"white"}} alt="Book Cover" width="157" height="242"></img>
               <Button id="addDetailButton" variant="primary" type="submit">Add</Button>
             
