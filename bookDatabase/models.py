@@ -10,7 +10,11 @@ class Book(models.Model):
     finished = models.BooleanField()
 
     def __str__(self):
-        return (str(self.id) + "," + self.name + "," + self.genre + "," + self.author + "," + self.coverPath + "," + self.publishedDate + "," + self.pageCount)
+        if (self.finished):
+            finish = "true"
+        else:
+            finish = "false"
+        return (str(self.id) + "," + self.name + "," + self.genre + "," + self.author + "," + self.coverPath + "," + self.publishedDate + "," + self.pageCount + "," + finish)
 
 class Read(models.Model):
     dateFinished = models.DateTimeField()

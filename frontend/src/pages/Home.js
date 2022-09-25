@@ -43,7 +43,6 @@ function Home(props) {
             <div>
                 <Cnavbar navSet={2} />
                 <BookDisplay bookData={books} select={"toRead"} />
-                <p>To read page</p>
             </div>
         )
     }

@@ -24,7 +24,7 @@ class toReadViewSet(viewsets.ModelViewSet):
     serializer_class = BookSerializer
 
 class ReadViewSet(viewsets.ModelViewSet):
-    queryset = Read.objects.all().prefetch_related('bookID')
+    queryset = Read.objects.all().prefetch_related('bookID').order_by('-dateFinished')
     serializer_class = ReadSerializer    
 
 
@@ -61,8 +61,21 @@ def delete(request, id):
     record.delete()
     return HttpResponseRedirect(reverse('index'))
 
-
-
+@csrf_exempt
+def mark(request):
+    title = request.POST["markDropdown"]
+    rec = Book.objects.filter(name=title)
+    rec = rec[0]
+    rec.finished = True
+    rec.save()
+    print(rec)
+    calendar = request.POST['markCalendar']
+    year = calendar[0:4]
+    month = calendar[5:7]
+    day = calendar[8:]
+    readRecord = Read(dateFinished=year + "-" + month + "-" + day + " 00:00", bookID=rec)
+    readRecord.save()
+    return HttpResponseRedirect(reverse('index'))
 
 
 

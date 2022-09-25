@@ -11,7 +11,7 @@ function BookDisplay(props) {
 
     
     for (var i=0; i<bookRecords.length; i++) {
-      if (bookRecords[i]["bookID"] === undefined) {
+      if (bookRecords[i]["bookID"] === undefined || bookRecords[i]["finished"] === false) {
         console.log(bookRecords[i]["name"])
         bookJSX.push(
           <Card className="thumbnailCard">

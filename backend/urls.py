@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from . import views
 from bookDatabase import views as dbView
 from bookDatabase import urls as dbUrls
@@ -26,6 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('addBook/', dbView.addBook, name="addBook"),
-    path('Manage/', views.index, name="index"),
-    path('db/', include(dbUrls))
-] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    path('mark/', dbView.mark, name="mark"),
+    path('db/', include(dbUrls)),
+] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) + [re_path(r'^(?:.*)/?$', views.index,name='routerIndex')]

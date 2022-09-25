@@ -19,6 +19,7 @@ function Manage() {
   var [markSelect, setSelectedMark] = useState("");
   var [filteredRemove, setFilteredRemove] = useState("");
   var [filteredMark, setFilteredMark] = useState("");
+  var [calendarVal, setCalendarVal] = useState("");
 
   var optionDBCall = (dbURL, setMethod) => {
     var currentUrl = window.location.protocol + "//" + window.location.host
@@ -145,7 +146,6 @@ function Manage() {
     for (var i=0; i<filteredRemove[0].length; i++) {
       if (filteredRemove[0][i] === title) {
         var deleteURL = window.location.protocol + "//" + window.location.host + "/db/Book/delete/" + filteredRemove[1][i];
-        console.log(deleteURL);
         fetch(deleteURL,{ method: 'DELETE' })
         return
       }
@@ -153,8 +153,6 @@ function Manage() {
     }
   }
   
-
-
   return (
     <div>
         <Cnavbar navSet={4} />
@@ -199,11 +197,11 @@ function Manage() {
 
         <div className="formContainer">
           <h1>Mark as read</h1>
-          <Form className="innerForm innerMarkForm">
-              <AutoComplete dropdown value={markSelect} onChange={(e) => setSelectedMark(e.value)} suggestions={filteredMark[0]} completeMethod={()=>{optionDBList(dbMark, setFilteredMark)}} />
+          <Form action="mark/" method="post" className="innerForm innerMarkForm">
+              <AutoComplete name="markDropdown" dropdown value={markSelect} onChange={(e) => setSelectedMark(e.value)} suggestions={filteredMark[0]} completeMethod={()=>{optionDBList(dbMark, setFilteredMark)}} />
               <br></br>
               <br></br>
-              <Calendar className="cal"></Calendar>
+              <Calendar name="markCalendar" dateFormat="yy/mm/dd" value={calendarVal} onChange={(e)=>{setCalendarVal(e.value)}} className="cal"></Calendar>
           
           <Button className="leftAlignButton" variant="primary" type="submit">
             Mark
