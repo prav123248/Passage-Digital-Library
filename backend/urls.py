@@ -26,5 +26,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name="index"),
     path('addBook/', dbView.addBook, name="addBook"),
+    path('Manage/', views.index, name="index"),
     path('db/', include(dbUrls))
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

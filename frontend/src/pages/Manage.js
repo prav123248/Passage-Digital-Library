@@ -3,17 +3,25 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Cnavbar from '../components/Cnavbar.js';
 import './Manage.css';
 import {Form, Button, Select} from 'react-bootstrap';
+import TextField from '@mui/material/TextField';
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import 'primereact/resources/primereact.min.css';
+import {AutoComplete} from 'primereact/autocomplete';
+import {Calendar} from 'primereact/calendar';
+
 
 function Manage() {
 
   var [dbRemove, setRemove] = useState("");
   var [dbMark, setMark] = useState("");
   var [dbData, setData] = useState("");
+  var [removeSelect, setSelectedRemove] = useState("");
+  var [markSelect, setSelectedMark] = useState("");
+  var [filteredRemove, setFilteredRemove] = useState("");
+  var [filteredMark, setFilteredMark] = useState("");
 
-
-
-  var currentUrl = window.location.protocol + "//" + window.location.host
-  var optionDBCall = (dbURL) => {
+  var optionDBCall = (dbURL, setMethod) => {
+    var currentUrl = window.location.protocol + "//" + window.location.host
     currentUrl = currentUrl + dbURL;
     fetch(currentUrl)
     .then(async response => {
@@ -22,27 +30,30 @@ function Manage() {
             return Promise.reject(response.statusText);
         }
 
-        setData(data);
+        setMethod(data);
+        
     })
   }
 
   useEffect(() => {
-    optionDBCall("/db/toRead/?format=json")
+    optionDBCall("/db/Book/?format=json", setRemove);
+    optionDBCall("/db/toRead/?format=json", setMark);
+
   },[]);
   
-  var optionDBList = () => {
-    var output = []
-
-    if (dbData !== undefined) {
-      console.log(dbData);
-      for (var i=0; i<dbData["results"].length; i++) {
-        output.push(<option>{dbData["results"][i]}</option>)
+  var optionDBList = (data, setFilteredResults) => {
+    var output = [[],[]]
+    if (data) {
+      for (var i=0; i<data["results"].length; i++) {
+        if (((data["results"][i]["name"]).toLowerCase()).startsWith((removeSelect).toLowerCase())) {
+          output[0].push(data["results"][i]["name"])
+          output[1].push(data["results"][i]["id"])
+        }
       }
     }
-
-    return output;
+    setFilteredResults(output);
+    console.log(output)
   }
-
 
   var [apiData, setApiData] = useState(0);
 
@@ -129,21 +140,36 @@ function Manage() {
 
   }
 
+
+  var deleteRecord = (title) => {
+    for (var i=0; i<filteredRemove[0].length; i++) {
+      if (filteredRemove[0][i] === title) {
+        var deleteURL = window.location.protocol + "//" + window.location.host + "/db/Book/delete/" + filteredRemove[1][i];
+        console.log(deleteURL);
+        fetch(deleteURL,{ method: 'DELETE' })
+        return
+      }
+    
+    }
+  }
+  
+
+
   return (
     <div>
         <Cnavbar navSet={4} />
         <div className="formContainer">
           <h1>Add book</h1>
-          <Form onSubmit={addBook} className="addForm">
+          <Form onSubmit={addBook} className="innerForm">
             <Form.Group controlId="URL">
               <Form.Control name="olurl" placeholder="OpenLibrary /Books URL" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className="leftAlignButton" variant="primary" type="submit">
               Fill In
             </Button>
           </Form>
 
-          <Form className="addForm" action="addBook/" method="post">
+          <Form className="innerForm" action="addBook/" method="post">
             <Form.Group controlId="bookDetails">
               <Form.Control name="title" maxLength="255" className="bookDetail" placeholder="Book Title" />
               <Form.Control name="author" maxLength="255" className="bookDetail" placeholder="Author" />
@@ -157,29 +183,32 @@ function Manage() {
             </Form.Group>
           
           </Form>
-
-
-
-
-
         </div>
 
         <div className="formContainer">
           <h1>Remove book</h1>
-          <Form className="addForm">
+          <Form className="innerForm">
             <Form.Group controlId="dropDown">
-            <Form.Select>
-              {optionDBList()}
-            </Form.Select>
+              <AutoComplete id="removeDropdown" dropdown value={removeSelect} onChange={(e) => setSelectedRemove(e.value)} suggestions={filteredRemove[0]} completeMethod={()=>{optionDBList(dbRemove, setFilteredRemove)}} />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Fill In
+            <Button className="leftAlignButton" onClick={()=>{deleteRecord(removeSelect)}} variant="primary" type="submit">
+              Remove
             </Button>
           </Form>
         </div>
 
         <div className="formContainer">
-          <h1>Mark book</h1>
+          <h1>Mark as read</h1>
+          <Form className="innerForm innerMarkForm">
+              <AutoComplete dropdown value={markSelect} onChange={(e) => setSelectedMark(e.value)} suggestions={filteredMark[0]} completeMethod={()=>{optionDBList(dbMark, setFilteredMark)}} />
+              <br></br>
+              <br></br>
+              <Calendar className="cal"></Calendar>
+          
+          <Button className="leftAlignButton" variant="primary" type="submit">
+            Mark
+          </Button>
+          </Form>
         </div>
     </div>
   )

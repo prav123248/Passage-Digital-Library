@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from . import views
 from django.urls import reverse
@@ -10,12 +10,17 @@ from rest_framework import permissions
 from .serializers import BookSerializer, ReadSerializer
 import urllib.request
 
+
 def index(request):
     return render(request, 'index.html')
 
 
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+
 class toReadViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.filter(finished=False)
+    queryset = Book.objects.all().filter(finished=False)
     serializer_class = BookSerializer
 
 class ReadViewSet(viewsets.ModelViewSet):
@@ -23,6 +28,10 @@ class ReadViewSet(viewsets.ModelViewSet):
     serializer_class = ReadSerializer    
 
 
+def view_404(request, exception=None):
+    # make a redirect to homepage
+    # you can use the name of url or just the plain link
+    return redirect('index') # or redirect('name-of-index-url')
 
 @csrf_exempt
 def addBook(request):
@@ -44,4 +53,27 @@ def addBook(request):
     bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, finished=finish, coverPath=uniqueCoverID)
     bookRecord.save()
     return HttpResponseRedirect(reverse('index'))
+
+
+@csrf_exempt
+def delete(request, id):
+    record = Book.objects.get(id=id)
+    record.delete()
+    return HttpResponseRedirect(reverse('index'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

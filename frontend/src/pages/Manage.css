@@ -14,15 +14,14 @@
     margin-bottom:1em;
 }
 
-.addForm {
-
+.innerForm {
     display: flex;
     flex-direction:row;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.addForm Button {
+.leftAlignButton {
     margin-left:1em;
 }
 
@@ -45,4 +44,12 @@ img[src=""] {
 
 .DropdownForm {
     border:2px solid red;
+}
+
+.innerMarkForm {
+    margin-bottom:3em;
+}
+
+.cal {
+    margin-left:1em;
 }
