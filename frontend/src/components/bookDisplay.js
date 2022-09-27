@@ -16,8 +16,8 @@ function BookDisplay(props) {
   var displayBooks = (bookRecords) => {
     var bookJSX = []
 
-    if (bookRecords.length > 0 && bookRecords["dateFinished"] === null) {
-      console.log(bookRecords);
+    if (bookRecords.length > 0 && bookRecords[0]["dateFinished"] === null) {
+      
       for (var i=0; i<bookRecords.length; i++) {
         bookJSX.push(
           <Card className="thumbnailCard">

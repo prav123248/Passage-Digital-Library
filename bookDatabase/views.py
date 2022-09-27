@@ -49,30 +49,28 @@ def addBook(request):
         file.write(image)
         file.close()
     
-    bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, finished=finish, coverPath=uniqueCoverID, dateFinished=None)
+    bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, coverPath=uniqueCoverID, dateFinished=None)
     bookRecord.save()
     return HttpResponseRedirect(reverse('index'))
 
 
 @csrf_exempt
-def delete(request, id):
-    record = Book.objects.get(id=id)
+def delete(request):
+    bookName = request.POST['removeSelection']
+    record = Book.objects.filter(name=bookName)[0]
     record.delete()
     return HttpResponseRedirect(reverse('index'))
 
 @csrf_exempt
 def mark(request):
     title = request.POST["markDropdown"]
-    rec = Book.objects.filter(name=title)
-    rec = rec[0]
-    rec.finished = True
-    rec.save()
+    rec = Book.objects.filter(name=title)[0]
     calendar = request.POST['markCalendar']
     year = calendar[0:4]
     month = calendar[5:7]
     day = calendar[8:]
-    readRecord = Read(dateFinished=year + "-" + month + "-" + day + " 00:00", bookID=rec)
-    readRecord.save()
+    rec.dateFinished=year + "-" + month + "-" + day + " 00:00"    
+    rec.save()
     return HttpResponseRedirect(reverse('index'))
 
 

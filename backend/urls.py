@@ -27,5 +27,6 @@ urlpatterns = [
     path('', views.index, name="index"),
     path('addBook/', dbView.addBook, name="addBook"),
     path('mark/', dbView.mark, name="mark"),
+    path('delete/', dbView.delete, name="delete"),
     path('db/', include(dbUrls)),
 ] + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT) + [re_path(r'^(?:.*)/?$', views.index,name='routerIndex')]

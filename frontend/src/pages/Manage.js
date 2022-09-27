@@ -10,67 +10,26 @@ import {AutoComplete} from 'primereact/autocomplete';
 import {Calendar} from 'primereact/calendar';
 
 
-function Manage() {
+function Manage(props) {
 
-  var [dbRemove, setRemove] = useState("");
-  var [dbMark, setMark] = useState("");
-  var [dbData, setData] = useState("");
-  var [removeSelect, setSelectedRemove] = useState("");
-  var [markSelect, setSelectedMark] = useState("");
-  var [filteredRemove, setFilteredRemove] = useState("");
-  var [filteredMark, setFilteredMark] = useState("");
-  var [calendarVal, setCalendarVal] = useState("");
-
-  var optionDBCall = (dbURL, setMethod) => {
-    var currentUrl = window.location.protocol + "//" + window.location.host
-    currentUrl = currentUrl + dbURL;
-    fetch(currentUrl)
-    .then(async response => {
-        const data = await response.json();
-        if (!response.ok) {
-            return Promise.reject(response.statusText);
-        }
-
-        setMethod(data);
-        
-    })
-  }
-
-  useEffect(() => {
-    optionDBCall("/db/Book/?format=json", setRemove);
-    optionDBCall("/db/toRead/?format=json", setMark);
-
-  },[]);
-  
-  var optionDBList = (data, setFilteredResults) => {
-    var output = [[],[]]
-    if (data) {
-      for (var i=0; i<data["results"].length; i++) {
-        if (((data["results"][i]["name"]).toLowerCase()).startsWith((removeSelect).toLowerCase())) {
-          output[0].push(data["results"][i]["name"])
-          output[1].push(data["results"][i]["id"])
-        }
-      }
-    }
-    setFilteredResults(output);
-    console.log(output)
-  }
 
   var [apiData, setApiData] = useState(0);
+  var [unread, setUnread] = useState("");
+  var [allBooks, setBooks] = useState("");
+  var [filteredRemove, setFilteredRemove] = useState("");
+  var [typedRemove, setTypedRemove] = useState("");
+  var [filteredMark, setFilteredMark] = useState("");
+  var [typedMark, setTypedMark] = useState("");
+  var [calendarVal, setCalendarVal] = useState("");
 
-  var [url, setUrl] = useState("");
-  var [title, setTitle] = useState("");
-  var [author, setAuthor] = useState("");
-  var [genre, setGenre] = useState("");
-  var [pagecount, setPages] = useState("");
-  var [date, setDate] = useState("");
-  var [coverID, setCover] = useState("");
-  var [authors, setAuthors] = useState("");
-  var [coverPage, setCoverPage] = useState("");
-
+  var title;
+  var author;
+  var date;
+  var pagecount;
+  var coverID;
+  var coverPage;
 
   
-
   const apiCall = (webPage) => {
     fetch(webPage.substr(0,webPage.lastIndexOf("/"))+".json")
     .then(async response => {
@@ -137,19 +96,23 @@ function Manage() {
   const addBook = (event) => {
     event.preventDefault();
     apiCall(event.target.olurl.value);
-
-
   }
 
+  useEffect(() => {
+    props.dbCall("/db/Book/?format=json", setBooks);
+    props.dbCall("/db/Book/toRead/?format=json", setUnread);
+  },[]);
 
-  var deleteRecord = (title) => {
-    for (var i=0; i<filteredRemove[0].length; i++) {
-      if (filteredRemove[0][i] === title) {
-        var deleteURL = window.location.protocol + "//" + window.location.host + "/db/Book/delete/" + filteredRemove[1][i];
-        fetch(deleteURL,{ method: 'DELETE' })
-        return
+  var suggestionsFilter = (data, setFilteredResults) => {
+    var suggestions = []
+    if (data) {
+      for (var i=0; i<data.length; i++) {
+        
+        if (data[i]["name"].toLowerCase().startsWith(typedRemove.toLowerCase())) {
+          suggestions.push(data[i]["name"])
+        }
       }
-    
+      setFilteredResults(suggestions)
     }
   }
   
@@ -185,11 +148,11 @@ function Manage() {
 
         <div className="formContainer">
           <h1>Remove book</h1>
-          <Form className="innerForm">
+          <Form className="innerForm" action="delete/" method="post">
             <Form.Group controlId="dropDown">
-              <AutoComplete id="removeDropdown" dropdown value={removeSelect} onChange={(e) => setSelectedRemove(e.value)} suggestions={filteredRemove[0]} completeMethod={()=>{optionDBList(dbRemove, setFilteredRemove)}} />
+              <AutoComplete name="removeSelection" id="removeDropdown" dropdown value={typedRemove} onChange={(e) => setTypedRemove(e.value)} suggestions={filteredRemove} completeMethod={()=>{suggestionsFilter(allBooks["results"], setFilteredRemove)}} />
             </Form.Group>
-            <Button className="leftAlignButton" onClick={()=>{deleteRecord(removeSelect)}} variant="primary" type="submit">
+            <Button className="leftAlignButton" variant="primary" type="submit">
               Remove
             </Button>
           </Form>
@@ -197,15 +160,14 @@ function Manage() {
 
         <div className="formContainer">
           <h1>Mark as read</h1>
-          <Form action="mark/" method="post" className="innerForm innerMarkForm">
-              <AutoComplete name="markDropdown" dropdown value={markSelect} onChange={(e) => setSelectedMark(e.value)} suggestions={filteredMark[0]} completeMethod={()=>{optionDBList(dbMark, setFilteredMark)}} />
+          <Form className="innerForm innerMarkForm" action="mark/" method="post" >
+              <AutoComplete name="markDropdown" dropdown value={typedMark} onChange={(e) => setTypedMark(e.value)} suggestions={filteredMark} completeMethod={()=>{suggestionsFilter(unread, setFilteredMark)}} />
               <br></br>
               <br></br>
               <Calendar name="markCalendar" dateFormat="yy/mm/dd" value={calendarVal} onChange={(e)=>{setCalendarVal(e.value)}} className="cal"></Calendar>
-          
-          <Button className="leftAlignButton" variant="primary" type="submit">
-            Mark
-          </Button>
+            <Button className="leftAlignButton" variant="primary" type="submit">
+              Mark
+            </Button>
           </Form>
         </div>
     </div>
