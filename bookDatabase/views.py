@@ -32,9 +32,16 @@ class BookViewSet(viewsets.ModelViewSet):
         read = Book.objects.exclude(dateFinished__isnull = True)
         serializer = self.get_serializer(read,many=True)
         return Response(serializer.data)
-    
+
+def returnValidTime(date):
+    year = date[0:4]
+    month = date[5:7]
+    day = date[8:]
+    return year + "-" + month + "-" + day + " 00:00"    
+
+ 
 @csrf_exempt
-def addBook(request):
+def add(request):
     title = request.POST['title']
     author = request.POST['author']
     genre = request.POST['genre']
@@ -53,6 +60,32 @@ def addBook(request):
     bookRecord.save()
     return HttpResponseRedirect(reverse('index'))
 
+@csrf_exempt
+def update(request):
+    bookID = request.POST['updateID']
+    title = request.POST['updateTitle']
+    author = request.POST['updateAuthor']
+    genre = request.POST['updateGenre']
+    pageCount = request.POST['updatePageCount']
+    published = request.POST['updatePublished']
+    dateFinished = request.POST['updateDateFinished']
+
+    bookRecord = Book.objects.get(id=bookID)
+    bookRecord.name = title
+    bookRecord.author = author
+    bookRecord.genre = genre
+    bookRecord.pageCount = pageCount
+    bookRecord.publishedDate = published
+
+    if bookRecord.dateFinished != None:
+        bookRecord.dateFinished = returnValidTime(dateFinished)
+        
+    bookRecord.save()
+
+    print(bookRecord)
+    return HttpResponseRedirect(reverse('index'))
+
+
 
 @csrf_exempt
 def delete(request):
@@ -65,11 +98,8 @@ def delete(request):
 def mark(request):
     title = request.POST["markDropdown"]
     rec = Book.objects.filter(name=title)[0]
-    calendar = request.POST['markCalendar']
-    year = calendar[0:4]
-    month = calendar[5:7]
-    day = calendar[8:]
-    rec.dateFinished=year + "-" + month + "-" + day + " 00:00"    
+    date = request.POST['markCalendar']
+    rec.dateFinished = returnValidTime(date)
     rec.save()
     return HttpResponseRedirect(reverse('index'))
 

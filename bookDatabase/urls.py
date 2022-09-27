@@ -21,9 +21,6 @@ router = routers.DefaultRouter()
 router.register(r'Book', views.BookViewSet, basename="book")
 
 urlpatterns = [
-    path('addBook/', views.addBook, name='addBook'),
     path('', include(router.urls)),
-    path('Book/delete/<int:id>',views.delete, name='delete'),
-    path('mark', views.mark,name="mark"),
 ]
 

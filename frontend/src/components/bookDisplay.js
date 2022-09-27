@@ -68,7 +68,8 @@ function BookDisplay(props) {
                   <b>Publish Date :</b> {bookRecords[i]["publishedDate"]}
                   <br></br>
                   <br></br>
-                  <b>Finished :</b> {bookRecords[i]["dateFinished"]}
+                  <b>Finished :</b> <br></br>
+                  {bookRecords[i]["dateFinished"].slice(0,9)}
                 </p>
               </Card.ImgOverlay>
             </div>

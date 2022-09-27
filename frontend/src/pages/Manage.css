@@ -50,6 +50,10 @@ img[src=""] {
     margin-bottom:3em;
 }
 
-.cal {
+#finishedCalendar {
     margin-left:1em;
+}
+
+#updateButton {
+    margin-top:1em;
 }
