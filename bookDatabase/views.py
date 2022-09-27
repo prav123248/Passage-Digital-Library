@@ -4,10 +4,12 @@ from . import views
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.template import loader
-from .models import Book, Read
+from .models import Book
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import BookSerializer, ReadSerializer
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from .serializers import BookSerializer
 import urllib.request
 
 
@@ -19,20 +21,18 @@ class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
-class toReadViewSet(viewsets.ModelViewSet):
-    queryset = Book.objects.all().filter(finished=False)
-    serializer_class = BookSerializer
+    @action(methods=['get'],detail=False)
+    def toRead(self, request):
+        unread = Book.objects.exclude(dateFinished__isnull = False)
+        serializer = self.get_serializer(unread,many=True)
+        return Response(serializer.data)
 
-class ReadViewSet(viewsets.ModelViewSet):
-    queryset = Read.objects.all().prefetch_related('bookID').order_by('-dateFinished')
-    serializer_class = ReadSerializer    
-
-
-def view_404(request, exception=None):
-    # make a redirect to homepage
-    # you can use the name of url or just the plain link
-    return redirect('index') # or redirect('name-of-index-url')
-
+    @action(methods=['get'], detail=False)
+    def read(self,request):
+        read = Book.objects.exclude(dateFinished__isnull = True)
+        serializer = self.get_serializer(read,many=True)
+        return Response(serializer.data)
+    
 @csrf_exempt
 def addBook(request):
     title = request.POST['title']
@@ -40,7 +40,6 @@ def addBook(request):
     genre = request.POST['genre']
     pageCount = request.POST['pagecount']
     published = request.POST['published']
-    finish = False
     coverURL=request.POST['coverPath']
     uniqueCoverID = coverURL.split("id/")[1]
     coverFileName = "media/Covers/" + uniqueCoverID
@@ -50,7 +49,7 @@ def addBook(request):
         file.write(image)
         file.close()
     
-    bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, finished=finish, coverPath=uniqueCoverID)
+    bookRecord = Book(name=title, genre=genre, author=author, pageCount=pageCount, publishedDate=published, finished=finish, coverPath=uniqueCoverID, dateFinished=None)
     bookRecord.save()
     return HttpResponseRedirect(reverse('index'))
 
@@ -68,7 +67,6 @@ def mark(request):
     rec = rec[0]
     rec.finished = True
     rec.save()
-    print(rec)
     calendar = request.POST['markCalendar']
     year = calendar[0:4]
     month = calendar[5:7]

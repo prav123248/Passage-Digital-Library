@@ -7,19 +7,11 @@ class Book(models.Model):
     coverPath = models.CharField(max_length=255)
     publishedDate = models.CharField(max_length=255)
     pageCount = models.CharField(max_length=255)
-    finished = models.BooleanField()
+    dateFinished = models.DateTimeField(default=None, blank=True, null=True)
 
     def __str__(self):
-        if (self.finished):
-            finish = "true"
+        if (self.dateFinished):
+            date = str(self.dateFinished)
         else:
-            finish = "false"
-        return (str(self.id) + "," + self.name + "," + self.genre + "," + self.author + "," + self.coverPath + "," + self.publishedDate + "," + self.pageCount + "," + finish)
-
-class Read(models.Model):
-    dateFinished = models.DateTimeField()
-    bookID = models.ForeignKey(Book, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return str(self.id)
-
+            date = "None"
+        return (str(self.id) + "," + self.name + "," + self.genre + "," + self.author + "," + self.coverPath + "," + self.publishedDate + "," + self.pageCount + "," + date)
