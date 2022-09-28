@@ -27,7 +27,6 @@ function App() {
           <Route path="/" element={<Home dbCall={bookDbCall} select={["read",1]} />} />
           <Route path="Library" element={<Home dbCall={bookDbCall} select={["read",1]} />} />
           <Route path="ToRead" element={<Home dbCall={bookDbCall} select={["toRead",2]} />} />
-          <Route path="Statistics" element={<Statistics />} />
           <Route path="Manage" element={<Manage dbCall={bookDbCall} />} />
           <Route path="*" element={<NoPage />} />
       </Routes>
