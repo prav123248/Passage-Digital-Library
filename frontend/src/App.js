@@ -7,7 +7,6 @@ import Statistics from "./pages/Statistics";
 import NoPage from "./pages/NoPage";
 
 function App() {
-  var [selection, setSelection] = useState("");
 
   var bookDbCall = (dbURL, setData) => {
       var currentUrl = window.location.protocol + "//" + window.location.host + dbURL;

@@ -11,7 +11,8 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .serializers import BookSerializer
 import urllib.request
-
+from os import remove
+from os.path import exists
 
 def index(request):
     return render(request, 'index.html')
@@ -29,7 +30,7 @@ class BookViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], detail=False)
     def read(self,request):
-        read = Book.objects.exclude(dateFinished__isnull = True)
+        read = Book.objects.exclude(dateFinished__isnull = True).order_by('-dateFinished')
         serializer = self.get_serializer(read,many=True)
         return Response(serializer.data)
 
@@ -91,6 +92,9 @@ def update(request):
 def delete(request):
     bookName = request.POST['removeSelection']
     record = Book.objects.filter(name=bookName)[0]
+    cover = "media/Covers/" + record.coverPath
+    if exists(cover):
+        remove(cover)
     record.delete()
     return HttpResponseRedirect(reverse('index'))
 
