@@ -132,12 +132,12 @@ function Manage(props) {
     props.dbCall("/db/Book/toRead/?format=json", setUnread);
   },[]);
 
-  var suggestionsFilter = (data, setFilteredResults) => {
+  var suggestionsFilter = (data, setFilteredResults,enteredInput) => {
     var suggestions = []
     if (data) {
       for (var i=0; i<data.length; i++) {
         
-        if (data[i]["name"].toLowerCase().startsWith(typedRemove.toLowerCase())) {
+        if (data[i]["name"].toLowerCase().startsWith(enteredInput.toLowerCase())) {
           suggestions.push(data[i]["name"])
         }
       }
@@ -177,8 +177,8 @@ function Manage(props) {
         <div className="formContainer">
           <h1>Update Book</h1>
           <Form onSubmit={updateBook} className="innerForm">
-          <Form.Group controlId="URL">
-            <AutoComplete name="updateDropdown" dropdown value={typedUpdate} onChange={(e) => setTypedUpdate(e.value)} suggestions={filteredUpdate} completeMethod={()=>{suggestionsFilter(allBooks["results"], setFilteredUpdate)}} />      
+          <Form.Group controlId="updateDrop">
+            <AutoComplete name="updateDropdown" dropdown value={typedUpdate} onChange={(e) => setTypedUpdate(e.value)} suggestions={filteredUpdate} completeMethod={()=>{suggestionsFilter(allBooks["results"], setFilteredUpdate, typedUpdate)}} />      
           </Form.Group>
           <Button className="leftAlignButton" variant="primary" type="submit">
             Select
@@ -204,7 +204,7 @@ function Manage(props) {
           <h1>Remove book</h1>
           <Form className="innerForm" action="delete/" method="post">
             <Form.Group controlId="dropDown">
-              <AutoComplete name="removeSelection" id="removeDropdown" dropdown value={typedRemove} onChange={(e) => setTypedRemove(e.value)} suggestions={filteredRemove} completeMethod={()=>{suggestionsFilter(allBooks["results"], setFilteredRemove)}} />
+              <AutoComplete name="removeSelection" id="removeDropdown" dropdown value={typedRemove} onChange={(f) => setTypedRemove(f.value)} suggestions={filteredRemove} completeMethod={()=>{suggestionsFilter(allBooks["results"], setFilteredRemove, typedRemove)}} />
             </Form.Group>
             <Button className="leftAlignButton" variant="primary" type="submit">
               Remove
@@ -215,7 +215,7 @@ function Manage(props) {
         <div className="formContainer">
           <h1>Mark as read</h1>
           <Form className="innerForm innerMarkForm" action="mark/" method="post" >
-              <AutoComplete name="markDropdown" dropdown value={typedMark} onChange={(e) => setTypedMark(e.value)} suggestions={filteredMark} completeMethod={()=>{suggestionsFilter(unread, setFilteredMark)}} />
+              <AutoComplete name="markDropdown" dropdown value={typedMark} onChange={(e) => setTypedMark(e.value)} suggestions={filteredMark} completeMethod={()=>{suggestionsFilter(unread, setFilteredMark, typedMark)}} />
               <br></br>
               <br></br>
               <Calendar name="markCalendar" dateFormat="yy/mm/dd" value={calendarVal} onChange={(e)=>{setCalendarVal(e.value)}} id="finishedCalendar"></Calendar>
