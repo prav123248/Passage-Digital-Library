@@ -9,8 +9,7 @@ solely on the interface and providing an adequate user experience for managing b
 ![bookView](https://user-images.githubusercontent.com/78224090/193417096-262cfd5e-65a5-4509-a14b-8d918562dd24.PNG)
 
 The main interface is a responsive grid view of book covers with extra details such as genre, pagecount or author being displayed on hover. These details are easy to add
-as the system makes use of the OpenLibrary API, meaning users can use URLs in the right format to automatically fill in detail fields. This means data does not need to be 
-entered manually which can be tedious.
+as the system makes use of the OpenLibrary API. This means data can be filled in automatically using an appropriate URL from their site, saving the time and effort of entering data manually.
 
 #### To Read Interface (with Hover)
 ![hoverView (2)](https://user-images.githubusercontent.com/78224090/193417203-42d26e5e-8be1-4990-95b0-661506d7541e.PNG)
