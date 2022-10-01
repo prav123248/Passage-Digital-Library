@@ -30,4 +30,16 @@ The above image showcases how book details from the database are displayed. On h
     - Updating existing book data in the database
     - Removing book data from the database
 
-
+### Setup :
+    (01) - Install Node and Pip
+    (02) - Open CMD in the same directory as manage.py
+    (03) - Type "cd frontend" in CMD
+    (04) - Install libraries using the command "npm install"
+    (05) - Enter command "npm run build"
+    (06) - Install Django, djangorestframework and urllib3 with command "pip install Django djangorestframework urllib3"
+    (07) - Enter command "cd .." to return to the manage.py directory
+    (08) - Run command "python manage.py makemigrations bookDatabase"
+    (09) - Run command "python manage.py migrate"
+    (10) - Run command "python manage.py"
+    (11) - Go to the address specified for the development server
+    
