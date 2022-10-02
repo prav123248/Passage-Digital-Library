@@ -2,7 +2,7 @@
 
 ### Description :
 As an avid reader, a gap I found in book reading platforms such as Goodreads and Storygraph is an appealing interface for books read. Existing platforms such as those
-two focus on the community and statistics side at the expense of capturing the style of physical bookshelves. Passage is a digital library system designed to focus 
+two focus on the community and statistics side at the expense of capturing the style of physical bookshelves. Passage is a full stack digital library system designed to focus 
 solely on the interface and providing an adequate user experience for managing books.
 
 #### Main Library Interface
