@@ -34,11 +34,11 @@ The above image showcases how book details from the database are displayed. On h
     (02) - Open CMD in the same directory as manage.py
     (03) - Type "cd frontend" in CMD
     (04) - Install libraries using the command "npm install"
-    (05) - Enter command "npm run build"
+    (05) - Enter command "npm run build" and wait for this to finish before running step 10.
     (06) - Install Django, djangorestframework and urllib3 with command "pip install Django djangorestframework urllib3"
     (07) - Enter command "cd .." to return to the manage.py directory
     (08) - Run command "python manage.py makemigrations bookDatabase"
     (09) - Run command "python manage.py migrate"
-    (10) - Run command "python manage.py"
+    (10) - Run command "python manage.py runserver" after the npm build has completed
     (11) - Go to the address specified for the development server
     
