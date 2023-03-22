@@ -34,11 +34,15 @@ The above image showcases how book details from the database are displayed. On h
     (02) - Open CMD in the same directory as manage.py
     (03) - Type "cd frontend" in CMD
     (04) - Install libraries using the command "npm install"
-    (05) - Enter command "npm run build" and wait for this to finish before running step 10.
+    (05) - Enter command "npm run build" and wait for this to finish before running step 11.
     (06) - Install Django, djangorestframework and urllib3 with command "pip install Django djangorestframework urllib3"
     (07) - Enter command "cd .." to return to the manage.py directory
     (08) - Run command "python manage.py makemigrations bookDatabase"
     (09) - Run command "python manage.py migrate"
-    (10) - Run command "python manage.py runserver" after the npm build has completed
-    (11) - Go to the address specified for the development server
+    (10) - In the manage.py directory, make a folder called "media". Make a folder inside that called "Covers". This is case sensitive.
+    (10) - Run command "python manage.py runserver" after the npm build has completed and all previous steps are completed.
+    (11) - Go to the address specified for the development server (usually http://127.0.0.1:8000/)
+    (12) - Go to manage books and add a book. You can use a URL from openlibrary and fill in the details.
+    (13) - After adding a book, go to the "To Read" to see it appear.
+    (14) - Use Manage Books to Mark books as read or update/delete existing books.
     
